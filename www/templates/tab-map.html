@@ -1,0 +1,56 @@
+<ion-view view-title="Map">
+    <ion-nav-buttons side="left">
+        <button class="button button-clear icon ion-eye" ng-click="doSomething()">
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-clear icon ion-android-settings" ng-click="doSomething()">
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="map-content" data-tap-disabled="true">
+        <leaflet id='secretTelAviv'  ng-style="themap" width="100%" ></leaflet>
+        <button  ng-if="isNotFiltering" ng-click="zoomIn()" class="button button-energized button-positive button-fab button-fab-bottom-right button-fab-bottom-zoomIn animate-if">
+            <i class="icon ion-android-add"></i>
+        </button>
+        <button  ng-if="isNotFiltering"  ng-click="zoomOut()" class="button button-energized button-positive button-fab button-fab-bottom-right button-fab-bottom-zoomOut animate-if">
+            <i class="icon ion-android-remove"></i>
+        </button>
+        <button id="fab" ng-click="findMe()" ng-if="isNotFiltering" class="button button-energized button-positive button-fab button-fab-bottom-right button-fab-bottom-location">
+            <i class="icon ion-android-locate"></i>
+        </button>
+        <button id="fabio"  class="button button-positive button-energized button-fab button-fab-bottom-right" ng-click="isNotFiltering = !isNotFiltering; moreInfo={}; showCategories = true">
+            <i class="icon ion-android-menu"></i>
+        </button>
+        <div class="mid-bar dark-bg z1 padding location-mid animate-if" ng-if="moreInfo.title">
+            <h3>{{moreInfo.title}}</h3>
+            <p><span class="categoryInfo">{{moreInfo.category}}</span><span ng-repeat="tag in moreInfo.companyTags"> - {{tag}}</span></p></p>
+            <p>{{moreInfo.addressDisplay}}</p>
+            <button class="button button-positive button-energized button-fab button-fab-bottom-right button-fab-plus-right" ng-click="moreInfo.clicked = !moreInfo.clicked">
+                <i class="icon" ng-class="{'ion-android-add': !moreInfo.clicked, 'ion-android-remove': moreInfo.clicked}"></i>
+            </button>
+        </div>
+        <div class="content double-padding location-desc animate-if" ng-if="moreInfo.clicked && moreInfo.title">
+            <p class="text-muted">
+                {{moreInfo.description}}
+            </p>
+            <p class="calm rating-stars h3" ng-if="moreInfo.publicMetaData.rating">
+                <i class="icon {{n}}" ng-repeat="n in giveMeQuantity(moreInfo.publicMetaData.rating) track by $index"></i> ({{howManyReviews(moreInfo.publicMetaData.rating)}} reviews)
+            </p>
+            <a class="button button-positive-900 ink" ng-if="additionalInfo.facebookPage" href="additionalInfo.facebookPage">
+                <i class="icon ion-social-facebook"></i>
+            </a>
+            <a class="button button-positive ink" ng-if="additionalInfo.twitter" href="additionalInfo.twitter">
+                <i class="icon ion-social-twitter"></i>
+            </a>
+            <a class="button button-calm-900 ink" ng-if="additionalInfo.linkedin" href="additionalInfo.linkedin">
+                <i class="icon ion-social-linkedin"></i>
+            </a>
+
+        </div>
+        <div class="category-buttons" ng-if="mapResult.map && showCategories">
+            <button ng-click="filterCategory(c.icon._id)" ng-repeat="c in mapResult.map.categories" ng-if="mapResult.map && !isNotFiltering" style="background-color: {{c.color}}; border: none" ng-if="!isNotFiltering && mapResultBinding.mapResult" class="button button-positive button-fab button-fab-bottom-right animate-if">
+                <img class="category-icon" ng-src="img/{{getCategoryRoute(c.icon._id)}}{{c.icon._id}}.svg">
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

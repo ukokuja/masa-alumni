@@ -1,0 +1,29 @@
+<ion-view view-title="Congratulations!">
+  <ion-content>
+    <h4 style="text-align: center;">You've got your benefit on {{benefit.companyName}}!</h4>
+    <br>
+    <div style="text-align: center;">
+      <img src="img/done.gif" style="width: 33%">
+    </div>
+    <div class="row">
+      <div class="col">
+        <h4>Your order code is:</h4>
+        <div class="card">
+          <div class="item item-text-wrap">
+            {{benefit.hash}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button class="button button-block button-energized" ng-click="rate()">
+          Rate {{benefit.companyName}}
+        </button>
+        <button class="button button-block button-positive" ng-click="back()">
+          Back
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

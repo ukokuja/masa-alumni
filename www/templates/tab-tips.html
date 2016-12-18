@@ -1,0 +1,26 @@
+<ion-view view-title="Feed">
+  <ion-content class="has-header event-cards" has-bouncing="true">
+    <div ng-controller="EventCtrl">
+      <event-invitation ng-repeat="event in events"></event-invitation>
+    </div>
+    <poll></poll>
+    <div class="list card" ng-repeat="card in items">
+      <div class="item item-avatar">
+        <img ng-src="img/masa_logo.jpg">
+        <h2>{{card.from.name}}</h2>
+        <p>{{getFromNow(card.created_time)}}</p>
+      </div>
+      <div class="item item-body">
+        <img class="full-image" ng-src="{{card.full_picture}}" ng-click="card.clicked = true" ng-show="!card.clicked || !card.source">
+        <video width="320" height="240" controls ng-if="card.source && card.clicked == true" autoplay>
+          <source dynamic-url src="" type="video/mp4" autoplay>
+          </video>
+          <p ng-bind-html="card.message">
+          </p>
+        </div>
+      </div>
+      <div ng-if="!items || items.length == 0 ||!items[0]" class="loadingEvents">
+        <ion-spinner class="spinner spinner-android"></ion-spinner>
+      </div>
+    </ion-content>
+  </ion-view>

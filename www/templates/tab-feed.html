@@ -1,0 +1,20 @@
+<ion-view view-title="Activity">
+    <ion-content has-bouncing="true">
+        <div class="card card-activity" ng-repeat="f in feed" ng-init="more = false">
+            <div class="item item-avatar item-text-wrap stable-bg waves-effect waves-block waves-dark">
+                <span class="avatar" style="background-image: url('http://www.worldatlas.com/webimage/flags/countrys/zzzflags/illarge.gif');"></span>
+                <strong>{{f.title}}</strong><br>
+                <span ng-show="!more" ng-bind-html="f.contentSnippet"></span>
+                <span ng-show="more" ng-bind-html="f.content"></span>
+                <a class="" href="#" ng-show="!more" ng-click="more = true">ver mas</a>
+                <a class="" href="#" ng-show="more" ng-click="more = false">ver menos</a>
+                <!--<div class="card-footer text-right">
+                    <i class="icon ion-heart assertive"></i> 23
+                    <div class="pull-left">
+                        <i class="icon ion-clock"></i> just now
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

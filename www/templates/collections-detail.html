@@ -1,0 +1,26 @@
+<ion-view view-title="{{place.tagName}}">
+  <!--<ion-nav-bar class="bar-energized bar-flat" >
+  <ion-nav-buttons side="right">
+  <button class="buttonion-funnel" ng-click="doSomething()">
+</button>
+<button class="button ion-android-map" ng-click="doSomething()">
+</button>
+</ion-nav-buttons></ion-nav-bar>-->
+<ion-content class="padding">
+  <div class="list">
+      <div class="card" ng-repeat="place in collectionDistance | orderBy:sort" ng-if="$index<40">
+        <a class="item item-thumbnail-left item-collection" ng-click="to('tab.benefit-detail', {collectionId: '{{collectionId}}', benefitId: '{{place._id}}', tagName: '{{place.tagName}}', id: '{{place.key}}'})">
+          <img ng-src="{{place.picture}}">
+          <h2 class="companyName">{{place.companyName}}</h2>
+          <p><i class="icon ion-ios-location"></i> {{place.addressDisplay}}</p>
+          <p><i class="icon ion-navigate"></i> {{place.distance}} km</p>
+          <p class="stars" ng-if="place.publicMetaData.rating"><rating readOnly="true" ng-model="place.publicMetaData.rating" max="5"></rating></p>
+        </a>
+      </div>
+  </div>
+</ion-content>
+<button id="fab" ng-click="changeSort()" class="button button-energized button-positive button-fab button-fab-bottom-right">
+  <i class="icon ion-funnel"></i>
+  <i class="icon" ng-class="{'ion-android-star': sort == '-rate','ion-android-pin': sort == 'distance','ion-android-arrow-down': sort == 'companyName' }"></i>
+</button>
+</ion-view>

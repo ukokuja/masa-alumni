@@ -1,0 +1,33 @@
+<ion-view view-title="Benefit">
+  <ion-content class="">
+    <div class="ionic">
+      <div class="hero has-mask " ng-style="benefit.style">
+        <div class="content">
+          <button ng-click="liked = !liked" ng-class="{'text-white': !liked, 'text-red': liked}" class="button button-large button-clear flat waves-effect waves-button waves-light icon ion-heart pull-right"></button>
+          <button ng-click="toggleBackground(false)" class="button button-large button-clear flat waves-effect waves-button waves-light icon ion-images pull-right text-white"></button>
+          <button ng-click="toggleBackground(true)" class="button button-large button-clear flat waves-effect waves-button waves-light icon ion-map pull-right text-white"></button>
+        </div>
+      </div>
+      <div class="mid-bar dark-bg z1 padding">
+        <h3>{{benefit.companyName}}</h3>
+        <p class="stars" ng-if="benefit.publicMetaData.rating"><rating readOnly="true" ng-model="benefit.publicMetaData.rating" max="5"></rating></p>
+      </div>
+      <div class="content double-padding">
+        <h4 class="positive">{{benefit.addressDisplay}}</h4>
+        <p class="text-muted">
+          {{benefit.description}}
+        </p>
+      </div>
+      <div class="card">
+        <div class="item item-text-wrap" ng-click="scan(benefit._id)">
+          20% de descuento en menu del dia
+        </div>
+      </div>
+      <div class="card">
+        <div class="item item-text-wrap" ng-click="scan(benefit._id)">
+          20₪ en Fish & Chips
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
