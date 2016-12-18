@@ -20,13 +20,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
-    window.plugins.OneSignal.init("d8b5cbb9-74f7-40a9-a33e-7a65453ef37c",
-    {googleProjectNumber: "722253339598", autoRegister: true},
-    function(){console.log('e')});
-    window.plugins.OneSignal.registerForPushNotifications();
-    window.plugins.OneSignal.getIds(function(ids) {
-      localStorage.setItem("pushId", ids.userId);
-    });
+    if(window.plugins){
+      window.plugins.OneSignal.init("d8b5cbb9-74f7-40a9-a33e-7a65453ef37c",
+      {googleProjectNumber: "722253339598", autoRegister: true},
+      function(){console.log('e')});
+      window.plugins.OneSignal.registerForPushNotifications();
+      window.plugins.OneSignal.getIds(function(ids) {
+        localStorage.setItem("pushId", ids.userId);
+      });
+    }
+
   });
 })
 

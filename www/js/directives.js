@@ -1,37 +1,46 @@
 angular.module('starter.directives', [])
-.directive('eventInvitation', function() {
+.directive('eventInvitation', ['$timeout', function($timeout) {
   return {
     restrict: 'E',
     template:
-    '<div class="card card-event">'+
+    '<div class="card card-event {{event.type}}" style="background: url({{event.thumbnail}})">'+
     '<div class="item item-text-wrap">'+
     '<ion-spinner class="spinner" ng-if="!event.title"></ion-spinner>'+
     '<div class="list">'+
     '<div class="row">'+
     '<div class="col-80">'+
     '<a class="item item-thumbnail-left" href="#">'+
-    '<img class="event" src="{{event.image}}">'+
+    '<img class="event" ng-if="event.type" src="img/events-calendar-icon-white.png">'+
+    '<img class="event" ng-if="!event.type" src="img/events-calendar-icon.png">'+
     '<h2>{{event.title}}</h2>'+
     '<p>{{event.date}}</p>'+
     '<p>{{event.address}}</p>'+
     '</a>'+
     '</div>'+
-    '<div class="col-10 assist" ng-init="assist">'+
+    '<div class="col-10 assist">'+
     '<label class="toggle">'+
-    '<input type="checkbox" ng-model="assist">'+
-    '<div class="track">'+
-    '<div class="handle"></div>'+
-    '</div>'+
-    '<span ng-if="assist">Going</span>'+
+    '<ion-checkbox ng-if="!changingAssist" ng-click="changeAssist()" ng-checked="assist"></ion-checkbox>' +
+    '<ion-spinner ng-if="changingAssist" class="spinner spinner-android"></ion-spinner>' +
     '</label>'+
     '</div>'+
     '</div>'+
     '</div>'+
     '</div>'+
     '</div>'+
-    '</div>'
+    '</div>',
+    link: function(scope, element, attrs){
+      scope.assist = false;
+      scope.changeAssist = function(){
+        scope.changingAssist = true;
+        $timeout(function(){
+          scope.changingAssist = false;
+          scope.assist = !scope.assist;
+        }, 1500);
+      };
+
+    }
   }
-})
+}])
 .directive('poll', function() {
   return {
     restrict: 'E',

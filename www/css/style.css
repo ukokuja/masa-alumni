@@ -303,6 +303,15 @@ p.stars ul{
 }
 .card-event .item{
 }
+.card-event{
+      background-size: cover !important;
+}
+.card-event.opacity .item-text-wrap{
+   background-color: rgba(0,0,0,0.5);
+}
+.card-event.opacity .item *{
+   color: #FFF;
+}
 .tabs-striped.tabs-light .tab-item.tab-item-active, .tabs-striped.tabs-light .tab-item.active, .tabs-striped.tabs-light .tab-item.activated {
   color: #8ec22f !important;
   border-color: #8ec22f !important;
@@ -408,4 +417,25 @@ p.stars ul{
 }
 .eventtitle{
   margin-right: 10px;
+}
+
+.list.condensed-space{
+  margin-left: 0.5%;
+}
+
+.list.condensed-space > .card{
+  width: 49%;
+  display: inline-block;
+}
+
+.list .item.item-bg-image h2 {
+  font-size: 24px;
+  line-height: 106px;
+  text-align: center;
+}
+.item-checkbox .checkbox{
+  padding: 0;
+}
+div.list .item {
+  min-height: 30px;
 }

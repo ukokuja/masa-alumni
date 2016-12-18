@@ -6,7 +6,6 @@ angular.module('starter.controllers', [])
 .controller('EventCtrl', function($scope, EventService){
   $scope.events = [];
   EventService.getEvents().then(function(events){
-    console.log(events);
     $scope.events = events;
   });
 })
@@ -373,18 +372,22 @@ angular.module('starter.controllers', [])
     }
     $scope.scan = QRService.scan;
     var places = lsService.get('places');
+    var deviceId = lsService.get('deviceId');
     $ionicPlatform.ready(function(){
+      $cordovaSplashscreen.hide();
+      if(!deviceId){
+        executeWelcome();
+      }
       if(!places){
         MapmeService.getTags().then(function(r){
           $ionicLoading.hide();
           $scope.places = r;
           lsService.save(r, 'places');
-          $cordovaSplashscreen.hide();
         });
       }else{
         $ionicLoading.hide();
         $scope.places = places;
-        //$cordovaSplashscreen.hide();
+        //
       }
     });
     $scope.$on('$ionicView.beforeEnter', function () {
